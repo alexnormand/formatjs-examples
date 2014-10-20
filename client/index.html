@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head></head>
+  <body>
+
+<!-- LOAD Polyfills and locale data -->
+<script src="https://cdn.rawgit.com/andyearnshaw/Intl.js/master/dist/Intl.min.js"></script>
+<script src="https://cdn.rawgit.com/andyearnshaw/Intl.js/master/locale-data/jsonp/en-US.js"></script>
+<script src="https://cdn.rawgit.com/andyearnshaw/Intl.js/master/locale-data/jsonp/en-GB.js"></script>
+<script src="https://cdn.rawgit.com/andyearnshaw/Intl.js/master/locale-data/jsonp/fr-FR.js"></script>
+
+
+<!-- LOAD message formatter and locale info -->
+<script src="https://cdn.rawgit.com/yahoo/intl-messageformat/v1.0.1/dist/intl-messageformat.min.js"></script>
+<script src="https://cdn.rawgit.com/yahoo/intl-messageformat/v1.0.1/dist/locale-data/fr.js"></script>
+
+<script>
+
+var MESSAGES = {
+    'en-US': {
+        DATE: 'It is {date, date, short}',
+        photos: 'You have {numPhotos, plural, ' +
+            '=0 {no photos.}' +
+            '=1 {one photo.}' +
+            'other {# photos.}}'
+    },
+    'en-GB': {
+      DATE: 'It is {date, date, short}',
+    },
+    'fr-FR': {
+        photos: 'Vous avez {numPhotos, plural, ' +
+            '=0 {aucune photos.}' +
+            '=1 {une photo.}' +
+            'other {# photos.}}'
+    },
+    'es-MX': {
+        photos: 'Usted {numPhotos, plural, ' +
+            '=0 {no tiene fotos.}' +
+            '=1 {tiene una foto.}' +
+            'other {tiene # fotos.}}'
+    }
+};
+
+
+var msg = new IntlMessageFormat(MESSAGES['fr-FR'].photos, 'fr-FR');
+
+document.write(msg.format({numPhotos: 0}));    // => "You have no photos."
+document.write('<br>');
+document.write(msg.format({numPhotos: 1}));    // => "You have one photo."
+document.write('<br>');
+document.write(msg.format({numPhotos: 1000})); // => "You have 1,000 photos."
+document.write('<br>');
+
+var d = new IntlMessageFormat(MESSAGES['en-US'].DATE, 'en-US');
+document.write(d.format({ date: new Date() }));
+document.write('<br>');
+
+var d2 = new IntlMessageFormat(MESSAGES['en-GB'].DATE, 'en-GB');
+document.write(d2.format({ date: new Date() }));
+document.write('<br>');
+
+
+
+
+
+</script>
+
+
+</body>
+</html>
